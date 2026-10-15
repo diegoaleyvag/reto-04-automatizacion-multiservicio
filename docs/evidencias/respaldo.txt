@@ -1,0 +1,21 @@
+docker compose exec -T backend npm run seed
+
+> reto-04-backend@1.0.0 seed
+> node scripts/seed.js
+
+Sembrado completado. Los registros existentes se conservaron.
+COMPOSE='docker compose' sh scripts/respaldar.sh
+Respaldo PostgreSQL generado.
+Respaldo MariaDB generado.
+Respaldo completo: respaldos/20261015T195616Z-77858
+COMPOSE='docker compose' RESPALDO='' sh scripts/verificar-respaldo.sh
+Respaldo verificado: ambos motores restaurados en bases temporales; conteos y SHA-256 coinciden.
+{"postgres":{"count":4,"sha256":"6db4b1168123b2766a9598d7faa8ad7cba843c73dfcc3eabeab80868394126f7"},"mariadb":{"count":4,"sha256":"dc6adc898e28dea6eaec7fa6f53b7029092b540c9f4b8ec2ab10004b41e26142"}}
+ reto04-postgres-1 Copying reto04-postgres-1:/tmp/reto04-postgres.sql to respaldos/.pendiente-20261015T195616Z-77858/postgres.sql
+ reto04-postgres-1 Copied reto04-postgres-1:/tmp/reto04-postgres.sql to respaldos/.pendiente-20261015T195616Z-77858/postgres.sql
+ reto04-mariadb-1 Copying reto04-mariadb-1:/tmp/reto04-mariadb.sql to respaldos/.pendiente-20261015T195616Z-77858/mariadb.sql
+ reto04-mariadb-1 Copied reto04-mariadb-1:/tmp/reto04-mariadb.sql to respaldos/.pendiente-20261015T195616Z-77858/mariadb.sql
+ reto04-postgres-1 Copying respaldos/20261015T195616Z-77858/postgres.sql to reto04-postgres-1:/tmp/reto04-20261015195618_77897.sql
+ reto04-postgres-1 Copied respaldos/20261015T195616Z-77858/postgres.sql to reto04-postgres-1:/tmp/reto04-20261015195618_77897.sql
+ reto04-mariadb-1 Copying respaldos/20261015T195616Z-77858/mariadb.sql to reto04-mariadb-1:/tmp/reto04-20261015195618_77897.sql
+ reto04-mariadb-1 Copied respaldos/20261015T195616Z-77858/mariadb.sql to reto04-mariadb-1:/tmp/reto04-20261015195618_77897.sql

@@ -1,0 +1,195 @@
+docker compose exec -T backend npm test
+
+> reto-04-backend@1.0.0 test
+> node --test test/*.test.js
+
+TAP version 13
+# Subtest: La salud consulta PostgreSQL y MariaDB reales
+ok 1 - La salud consulta PostgreSQL y MariaDB reales
+  ---
+  duration_ms: 22.965958
+  type: 'test'
+  ...
+# Subtest: El listado de productos devuelve una colección
+ok 2 - El listado de productos devuelve una colección
+  ---
+  duration_ms: 8.505166
+  type: 'test'
+  ...
+# Subtest: Crear producto persiste exactamente sus datos en MariaDB
+ok 3 - Crear producto persiste exactamente sus datos en MariaDB
+  ---
+  duration_ms: 59.335625
+  type: 'test'
+  ...
+# Subtest: Editar producto conserva su código y actualiza la cantidad
+ok 4 - Editar producto conserva su código y actualiza la cantidad
+  ---
+  duration_ms: 33.079292
+  type: 'test'
+  ...
+# Subtest: Editar sin cambiar valores sigue devolviendo el producto
+ok 5 - Editar sin cambiar valores sigue devolviendo el producto
+  ---
+  duration_ms: 33.1925
+  type: 'test'
+  ...
+# Subtest: Eliminar producto lo retira del motor y repetir devuelve 404
+ok 6 - Eliminar producto lo retira del motor y repetir devuelve 404
+  ---
+  duration_ms: 18.322875
+  type: 'test'
+  ...
+# Subtest: Un código duplicado produce 409 y un mensaje amigable
+ok 7 - Un código duplicado produce 409 y un mensaje amigable
+  ---
+  duration_ms: 19.876417
+  type: 'test'
+  ...
+# Subtest: Un producto con código inválido produce 400
+ok 8 - Un producto con código inválido produce 400
+  ---
+  duration_ms: 8.7495
+  type: 'test'
+  ...
+# Subtest: El servidor rechaza la cantidad inválida -1
+ok 9 - El servidor rechaza la cantidad inválida -1
+  ---
+  duration_ms: 3.8055
+  type: 'test'
+  ...
+# Subtest: El servidor rechaza la cantidad inválida 1.5
+ok 10 - El servidor rechaza la cantidad inválida 1.5
+  ---
+  duration_ms: 2.008708
+  type: 'test'
+  ...
+# Subtest: El servidor rechaza la cantidad inválida "5"
+ok 11 - El servidor rechaza la cantidad inválida "5"
+  ---
+  duration_ms: 1.444458
+  type: 'test'
+  ...
+# Subtest: El servidor rechaza la cantidad inválida null
+ok 12 - El servidor rechaza la cantidad inválida null
+  ---
+  duration_ms: 2.790583
+  type: 'test'
+  ...
+# Subtest: El servidor rechaza la cantidad inválida 1000001
+ok 13 - El servidor rechaza la cantidad inválida 1000001
+  ---
+  duration_ms: 3.708125
+  type: 'test'
+  ...
+# Subtest: Se aceptan los extremos válidos de cantidad
+ok 14 - Se aceptan los extremos válidos de cantidad
+  ---
+  duration_ms: 8.409375
+  type: 'test'
+  ...
+# Subtest: El nombre vacío y un nombre excesivo se rechazan
+ok 15 - El nombre vacío y un nombre excesivo se rechazan
+  ---
+  duration_ms: 4.113958
+  type: 'test'
+  ...
+# Subtest: Editar un producto inexistente devuelve 404
+ok 16 - Editar un producto inexistente devuelve 404
+  ---
+  duration_ms: 5.08175
+  type: 'test'
+  ...
+# Subtest: El listado de tareas devuelve fechas y estados válidos
+ok 17 - El listado de tareas devuelve fechas y estados válidos
+  ---
+  duration_ms: 7.069875
+  type: 'test'
+  ...
+# Subtest: Crear tarea persiste los datos reales en PostgreSQL
+ok 18 - Crear tarea persiste los datos reales en PostgreSQL
+  ---
+  duration_ms: 18.337708
+  type: 'test'
+  ...
+# Subtest: Una tarea puede completarse y volver a estar pendiente
+ok 19 - Una tarea puede completarse y volver a estar pendiente
+  ---
+  duration_ms: 15.55175
+  type: 'test'
+  ...
+# Subtest: Eliminar tarea la retira de PostgreSQL y repetir devuelve 404
+ok 20 - Eliminar tarea la retira de PostgreSQL y repetir devuelve 404
+  ---
+  duration_ms: 9.877792
+  type: 'test'
+  ...
+# Subtest: Los títulos vacíos o demasiado largos producen 400
+ok 21 - Los títulos vacíos o demasiado largos producen 400
+  ---
+  duration_ms: 7.240417
+  type: 'test'
+  ...
+# Subtest: El estado de tarea exige un booleano JSON
+ok 22 - El estado de tarea exige un booleano JSON
+  ---
+  duration_ms: 11.856792
+  type: 'test'
+  ...
+# Subtest: Editar una tarea inexistente devuelve 404
+ok 23 - Editar una tarea inexistente devuelve 404
+  ---
+  duration_ms: 2.734042
+  type: 'test'
+  ...
+# Subtest: Las consultas parametrizadas conservan textos con sintaxis SQL
+ok 24 - Las consultas parametrizadas conservan textos con sintaxis SQL
+  ---
+  duration_ms: 13.032834
+  type: 'test'
+  ...
+# Subtest: Los identificadores inválidos no llegan a las consultas
+ok 25 - Los identificadores inválidos no llegan a las consultas
+  ---
+  duration_ms: 30.825125
+  type: 'test'
+  ...
+# Subtest: El cuerpo JSON mal formado recibe 400 sin exponer detalles
+ok 26 - El cuerpo JSON mal formado recibe 400 sin exponer detalles
+  ---
+  duration_ms: 1.615458
+  type: 'test'
+  ...
+# Subtest: Los cuerpos que no sean objetos JSON se rechazan
+ok 27 - Los cuerpos que no sean objetos JSON se rechazan
+  ---
+  duration_ms: 5.157959
+  type: 'test'
+  ...
+# Subtest: Se exige el tipo de contenido JSON
+ok 28 - Se exige el tipo de contenido JSON
+  ---
+  duration_ms: 1.827916
+  type: 'test'
+  ...
+# Subtest: Una solicitud mayor que 16 KiB recibe un error controlado
+ok 29 - Una solicitud mayor que 16 KiB recibe un error controlado
+  ---
+  duration_ms: 2.334
+  type: 'test'
+  ...
+# Subtest: Las rutas desconocidas y los métodos no admitidos reciben 404
+ok 30 - Las rutas desconocidas y los métodos no admitidos reciben 404
+  ---
+  duration_ms: 2.704208
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 609.756292

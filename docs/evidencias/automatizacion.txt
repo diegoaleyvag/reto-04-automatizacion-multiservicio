@@ -1,0 +1,8 @@
+Correcto: el sembrado ejecutado dos veces no duplica ejemplos y conserva las modificaciones y los registros creados.
+Correcto: 30 pruebas funcionales HTTP con PostgreSQL y MariaDB reales aprobadas.
+Correcto: Make ejecuta sembrado, respaldo y verificación en orden incluso con -j8.
+Correcto: ambos SQL contienen esquema y datos; restauración temporal con conteos y SHA-256 coincidentes, incluidos Unicode, comillas y saltos de línea.
+Correcto: un SQL alterado se rechaza por su huella y no modifica las bases de la aplicación.
+Correcto: la restauración sobre las bases actuales requiere autorización explícita en el comando.
+Correcto: al eliminar y recrear los cuatro contenedores se conserva el contenido de ambas bases.
+Correcto: salud de backend, PostgreSQL y MariaDB recuperada; frontend disponible en el mismo puerto.

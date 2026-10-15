@@ -1,0 +1,7 @@
+Correcto: los cuatro servicios muestran disponibilidad comprobada y ambos listados se cargan desde las bases.
+Correcto: validación local y duplicado HTTP 409 conservan los datos y señalan el campo.
+Correcto: recurso creado en MariaDB y editado por Fetch; cancelar una edición conserva el nombre guardado.
+Correcto: tareas creadas, completadas y eliminadas en PostgreSQL; ambas eliminaciones exigen confirmación y no recargan el documento.
+Correcto: revisión automática de accesibilidad sin incidencias graves o críticas (0 totales).
+Correcto: móvil de 390 px sin desbordamiento; fallo real de red conserva el formulario y la salud se recupera al reconectar.
+Correcto: no se produjeron errores de ejecución JavaScript.
