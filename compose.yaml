@@ -1,0 +1,78 @@
+name: reto04
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-operaciones}
+      POSTGRES_USER: ${POSTGRES_USER:-aplicacion}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_local_04}
+    volumes:
+      - datos_postgres:/var/lib/postgresql/data
+      - ./db/postgres:/docker-entrypoint-initdb.d:ro
+      - ./scripts:/operaciones:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+    restart: unless-stopped
+  mariadb:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-inventario}
+      MARIADB_USER: ${MARIADB_USER:-aplicacion}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-mariadb_local_04}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-administracion_local_04}
+    volumes:
+      - datos_mariadb:/var/lib/mysql
+      - ./db/mariadb:/docker-entrypoint-initdb.d:ro
+      - ./scripts:/operaciones:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+    restart: unless-stopped
+  backend:
+    build: ./backend
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: ${POSTGRES_DB:-operaciones}
+      POSTGRES_USER: ${POSTGRES_USER:-aplicacion}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_local_04}
+      MARIADB_HOST: mariadb
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-inventario}
+      MARIADB_USER: ${MARIADB_USER:-aplicacion}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-mariadb_local_04}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mariadb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 12s
+      retries: 12
+      start_period: 10s
+    init: true
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:${APP_PORT:-3004}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1/salud"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 5s
+    restart: unless-stopped
+volumes:
+  datos_postgres:
+  datos_mariadb:

@@ -1,0 +1,17 @@
+{
+  "name": "reto-04-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test test/*.test.js",
+    "seed": "node scripts/seed.js",
+    "snapshot": "node scripts/snapshot.js"
+  },
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "mysql2": "3.24.6",
+    "pg": "8.16.3"
+  }
+}

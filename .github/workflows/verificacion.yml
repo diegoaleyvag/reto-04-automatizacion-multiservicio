@@ -1,0 +1,31 @@
+name: Verificación completa
+on:
+  push:
+  pull_request:
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Iniciar cuatro servicios
+        run: make iniciar
+      - name: Ejecutar pruebas funcionales
+        run: make probar
+      - name: Comprobar sembrado idempotente
+        run: |
+          docker compose exec -T backend node scripts/snapshot.js > /tmp/antes.json
+          make sembrar
+          make sembrar
+          docker compose exec -T backend node scripts/snapshot.js > /tmp/despues.json
+          cmp /tmp/antes.json /tmp/despues.json
+      - name: Respaldar y restaurar en bases temporales
+        run: |
+          make respaldar
+          make verificar-respaldo
+      - name: Mostrar registros si ocurre un fallo
+        if: failure()
+        run: docker compose logs --no-color
+      - name: Detener y retirar datos de la verificación
+        if: always()
+        run: docker compose down -v
